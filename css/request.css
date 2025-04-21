@@ -1,0 +1,219 @@
+/* global */
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    user-select: none;
+    scroll-behavior: smooth;
+    font-family: "Red Hat Text", sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #00a6fe;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #006ba4;
+}
+
+body {
+    background-color: #fafafa;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-j-center {
+    justify-content: center;
+}
+
+.flex-a-center {
+    align-items: center;
+}
+
+.flex-a-start {
+    align-items: flex-start
+}
+
+.flex-j-between {
+    justify-content: space-between;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.upnormal-text,
+.upnormal-text * {
+    font-family: 'Poppins' !important;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+/* .loading {
+    width: 100%;
+    height: 100%;
+    background-color: #191b1a;
+    position: fixed;
+    top: 0px;
+    left: 0%;
+    display: flex;
+    z-index: 999999999999;
+}
+
+.loading .square {
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    gap: 20px;
+}
+
+.loading .square .icon {
+    width: 100px;
+}
+
+.loading .square .logo-text img {
+    height: 36.3px;
+    width: 0px;
+    object-fit: cover;
+    object-position: left;
+    transition: 1.2s;
+}
+
+.loading .square .logo-text p {
+    transition: .8s;
+    color: #d3d3d3;
+    text-transform: capitalize;
+    height: 0px;
+    width: 0px;
+    overflow: hidden;
+    opacity: 0px;
+} */
+
+/* body */
+
+body {
+    background-color: #202020;
+    display: flex;
+    height: 100vh;
+}
+
+form {
+    position: relative;
+    z-index: 22222222;
+    display: block;
+    margin: auto;
+    background-color: #191b1a;
+    box-shadow: 0px 0px 6px #000000a2;
+    width: 500px;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+
+form .form-body{
+    gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form .form-body * {
+    width: 100%;
+    background-color: #000000;
+    resize: none;
+    padding: 12px 13px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: #006faa;
+    letter-spacing: 1px;
+    box-shadow: 0px 0px 3px #000000a2;
+    font-size: 12px;
+}
+
+form *::placeholder {
+    color: #e0e0e08e;
+
+}
+
+form textarea {
+    height: 160px;
+}
+
+/* form .form-body button {
+    background-color: #00a5fe;
+    color: #fff;
+    font-weight: 500;
+    width: fit-content;
+    padding: 10px;
+    width: 30%;
+    margin-top: 10px;
+    box-shadow: none;
+} */
+
+form .form-body button{
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.5s;
+}
+
+form button:hover {
+    background-color: #0089d3;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.bg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+}
+
+form h1{
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: #e0e0e08e !important;
+    font-size: 25px !important;
+    text-align: center;
+
+}
+
+@media (min-width:0px) and (max-width:700px){
+    form{
+        width: 90%;
+    }
+    form h1{
+        font-size: 23px !important;
+        font-weight: 300;
+    }
+}
