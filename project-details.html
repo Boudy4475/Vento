@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Vento</title>
+    <link rel="icon" href="imgs/icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200..1000&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Mada:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+AR:wght@100..400&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00a6fe;
+            --primary-dark: #006ba4;
+            --bg-dark: #191b1a;
+            --bg-card: #222;
+            --text-light: #d3d3d3;
+            --text-gray: #888;
+            --success: #28a745;
+            --warning: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .project-details-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-dark));
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 166, 254, 0.1));
+            pointer-events: none;
+        }
+
+        .project-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-title h1 {
+            font-size: 2.5em;
+            color: var(--text-light);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-price {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .project-status.in-progress {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .project-status.pending {
+            background-color: var(--warning);
+            color: #000;
+        }
+
+        .project-status.completed {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .project-progress {
+            margin: 20px 0;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-info span {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        .progress-info .percentage {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .progress-container {
+            background-color: rgba(51, 51, 51, 0.5);
+            border-radius: 10px;
+            padding: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-details {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-details h2 {
+            color: var(--text-light);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            position: relative;
+        }
+
+        .project-details h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .project-description {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .project-features {
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li i {
+            color: var(--primary-color);
+        }
+
+        .project-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .info-item i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .project-actions a {
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-actions .edit-project {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .project-actions .edit-project:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .project-actions .back-to-profile {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .project-actions .back-to-profile:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+
+            .project-title {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <?php include "design/header.php"; ?>
+    
+    <nav>
+        <button class="logo" style="cursor: pointer;" href="index.html">
+            <img src="imgs/logo.png" alt="">
+        </button>
+    
+        <button class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    
+        <div class="nav-son">
+            <div class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="links">
+                <a href="#about_us">about</a>
+                <a href="#our_services">services</a>
+                <a href="#our_projects">projects</a>
+                <a href="#our_team">team</a>
+                <!-- <a href="?page=logout">logout</a> -->
+            </div>
+            <div class="btn-con">
+                <a href="#contact_us">
+                    contact us
+                </a>
+                <a href="request_service.html">
+                    Request service
+                </a>
+            </div>
+    
+        </div>
+        <span class="slash"></span>
+    
+        <div class="user-tap">
+            <div class="user-tap-img">
+                <img src="imgs/abdooo.jpeg" alt="">
+            </div>
+            <div class="user-tap-drop">
+                <div class="user-tap-drop-item">
+                    <a href="?page=profile">
+                        <i class="fa-solid fa-user"></i>
+                        Profile
+                    </a>
+                </div>
+                <div class="user-tap-drop-item">
+                    <a href="?page=logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+    </nav>
+
+    <div class="project-details-container">
+        <div class="project-header">
+            <div class="project-title">
+                <h1>E-commerce Website</h1>
+                <span class="project-price">$2,500</span>
+            </div>
+            <span class="project-status in-progress">In Progress</span>
+            <div class="project-progress">
+                <div class="progress-info">
+                    <span>Project Progress</span>
+                    <span class="percentage">75%</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-content">
+            <div class="project-details">
+                <h2>Project Details</h2>
+                <p class="project-description">
+                    A full-featured e-commerce website with product management, shopping cart, and payment integration. 
+                    The project includes responsive design and admin dashboard. Our team is working on implementing 
+                    advanced features like real-time inventory tracking, user authentication, and secure payment processing.
+                </p>
+
+                <div class="project-features">
+                    <h3>Key Features</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Responsive Design</li>
+                        <li><i class="fas fa-check"></i> Product Management System</li>
+                        <li><i class="fas fa-check"></i> Shopping Cart Functionality</li>
+                        <li><i class="fas fa-check"></i> Secure Payment Integration</li>
+                        <li><i class="fas fa-check"></i> User Authentication</li>
+                        <li><i class="fas fa-check"></i> Admin Dashboard</li>
+                        <li><i class="fas fa-check"></i> Real-time Inventory Tracking</li>
+                        <li><i class="fas fa-check"></i> Order Management System</li>
+                    </ul>
+                </div>
+
+                <div class="project-actions">
+                    <a href="#" class="edit-project">
+                        <i class="fas fa-edit"></i>
+                        Edit Project
+                    </a>
+                    <a href="user-profile.html" class="back-to-profile">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Profile
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-sidebar">
+                <div class="info-card">
+                    <h3>Project Information</h3>
+                    <div class="info-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Start Date: January 15, 2024</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Estimated Completion: March 15, 2024</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span>Project Manager: John Doe</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <span>Team Members: 5</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Contact Information</h3>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>project@example.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 234 567 890</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>New York, USA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html> 

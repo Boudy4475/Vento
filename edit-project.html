@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project - Vento</title>
+    <link rel="icon" href="imgs/icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200..1000&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Mada:wght@200..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+AR:wght@100..400&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00a6fe;
+            --primary-dark: #006ba4;
+            --bg-dark: #191b1a;
+            --bg-card: #222;
+            --text-light: #d3d3d3;
+            --text-gray: #888;
+            --success: #28a745;
+            --warning: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Red Hat Text', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .edit-project-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .edit-project-header {
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-dark));
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edit-project-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 166, 254, 0.1));
+            pointer-events: none;
+        }
+
+        .edit-project-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .edit-project-title h1 {
+            font-size: 2.5em;
+            color: var(--text-light);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .badge i {
+            font-size: 1.1em;
+        }
+
+        .badge.status {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .badge.progress {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .badge.progress .progress-value {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .edit-project-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .edit-form-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-form-section h2 {
+            color: var(--text-light);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            position: relative;
+        }
+
+        .edit-form-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .messages-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .messages-section h2 {
+            color: var(--text-light);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+            position: relative;
+        }
+
+        .messages-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .message-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .message-sender {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .message-time {
+            color: var(--text-gray);
+            font-size: 0.9em;
+        }
+
+        .message-content {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .message-form {
+            margin-top: 20px;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1em;
+            margin-bottom: 10px;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .edit-project-content {
+                grid-template-columns: 1fr;
+            }
+
+            .edit-project-title {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <?php include "design/header.php"; ?>
+    
+    <nav>
+        <button class="logo" style="cursor: pointer;" href="index.html">
+            <img src="imgs/logo.png" alt="">
+        </button>
+    
+        <button class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    
+        <div class="nav-son">
+            <div class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="links">
+                <a href="#about_us">about</a>
+                <a href="#our_services">services</a>
+                <a href="#our_projects">projects</a>
+                <a href="#our_team">team</a>
+                <!-- <a href="?page=logout">logout</a> -->
+            </div>
+            <div class="btn-con">
+                <a href="#contact_us">
+                    contact us
+                </a>
+                <a href="request_service.html">
+                    Request service
+                </a>
+            </div>
+    
+        </div>
+        <span class="slash"></span>
+    
+        <div class="user-tap">
+            <div class="user-tap-img">
+                <img src="imgs/abdooo.jpeg" alt="">
+            </div>
+            <div class="user-tap-drop">
+                <div class="user-tap-drop-item">
+                    <a href="?page=profile">
+                        <i class="fa-solid fa-user"></i>
+                        Profile
+                    </a>
+                </div>
+                <div class="user-tap-drop-item">
+                    <a href="?page=logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+    </nav>
+
+    <div class="edit-project-container">
+        <div class="edit-project-header">
+            <div class="edit-project-title">
+                <h1>Edit Project</h1>
+            </div>
+            <div class="project-badges">
+                <div class="badge status">
+                    <i class="fas fa-clock"></i>
+                    In Progress
+                </div>
+                <div class="badge progress">
+                    <i class="fas fa-chart-line"></i>
+                    Progress: <span class="progress-value">75%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="edit-project-content">
+            <div class="edit-form-section">
+                <h2>Project Information</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="project-name">Project Name</label>
+                        <input type="text" id="project-name" value="E-commerce Website">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-price">Project Price</label>
+                        <input type="number" id="project-price" value="2500">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-description">Project Description</label>
+                        <textarea id="project-description">A full-featured e-commerce website with product management, shopping cart, and payment integration.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additional-requirements">Additional Requirements</label>
+                        <textarea id="additional-requirements" placeholder="Enter any additional requirements or changes needed..."></textarea>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i>
+                            Save Changes
+                        </button>
+                        <a href="project-details.html" class="back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Project
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="messages-section">
+                <h2>Messages</h2>
+                <div class="message-list">
+                    <div class="message">
+                        <div class="message-header">
+                            <span class="message-sender">Admin</span>
+                            <span class="message-time">2024-02-20 10:30 AM</span>
+                        </div>
+                        <div class="message-content">
+                            We've started working on the payment integration. Would you like to review the initial design?
+                        </div>
+                    </div>
+
+                    <div class="message">
+                        <div class="message-header">
+                            <span class="message-sender">You</span>
+                            <span class="message-time">2024-02-20 11:15 AM</span>
+                        </div>
+                        <div class="message-content">
+                            Yes, please share the design. Also, I'd like to add a wishlist feature if possible.
+                        </div>
+                    </div>
+
+                    <div class="message">
+                        <div class="message-header">
+                            <span class="message-sender">Admin</span>
+                            <span class="message-time">2024-02-20 02:45 PM</span>
+                        </div>
+                        <div class="message-content">
+                            We can definitely add the wishlist feature. I'll send you the payment integration design by tomorrow.
+                        </div>
+                    </div>
+                </div>
+
+                <form class="message-form">
+                    <textarea class="message-input" placeholder="Type your message here..."></textarea>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html> 

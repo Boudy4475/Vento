@@ -164,6 +164,11 @@ nav {
     left: 0%;
     z-index: 888888888;
     height: 70px;
+    gap: 20px;
+}
+
+nav .logo{
+    margin-right: auto;
 }
 
 nav .logo img {
@@ -175,6 +180,7 @@ nav .nav-son {
     width: 65%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 nav .links {
@@ -1250,4 +1256,57 @@ main .hero-img img {
     main .btn-con a {
         width: 100%;
     }
+}
+
+.slash {
+    display: block;
+    width: 2px;
+    height: 35px;
+    background-color: #ffffffa4;
+}
+
+.user-tap {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.user-tap .user-tap-img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.user-tap .user-tap-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #fff;
+}
+
+.user-tap-drop {
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    overflow: hidden;
+}
+
+.user-tap-drop .user-tap-drop-item a {
+    padding: 10px 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #fff;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.user-tap-drop .user-tap-drop-item a:hover {
+    background-color: #333;
 }

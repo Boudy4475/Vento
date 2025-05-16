@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Vento</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .edit-profile-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #191b1a;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .profile-image-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00a6fe;
+        }
+
+        .image-upload {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #00a6fe;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .image-upload:hover {
+            background: #006ba4;
+        }
+
+        .image-upload i {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h1 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            color: #d3d3d3;
+            font-size: 16px;
+        }
+
+        .edit-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d3d3d3;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #131413;
+            border: 1px solid #00a6fe;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #006ba4;
+            box-shadow: 0 0 10px rgba(0, 166, 254, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            border: 1px solid #00a6fe;
+            color: #00a6fe;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(0, 166, 254, 0.1);
+        }
+
+        .btn-save {
+            background: #00a6fe;
+            border: 1px solid #00a6fe;
+            color: #fff;
+        }
+
+        .btn-save:hover {
+            background: #006ba4;
+            border-color: #006ba4;
+        }
+
+        @media (max-width: 768px) {
+            .edit-profile-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .edit-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button class="logo" style="cursor: pointer;" href="index.html">
+            <img src="imgs/logo.png" alt="">
+        </button>
+    
+        <button class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    
+        <div class="nav-son">
+            <div class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="links">
+                <a href="#about_us">about</a>
+                <a href="#our_services">services</a>
+                <a href="#our_projects">projects</a>
+                <a href="#our_team">team</a>
+                <!-- <a href="?page=logout">logout</a> -->
+            </div>
+            <div class="btn-con">
+                <a href="#contact_us">
+                    contact us
+                </a>
+                <a href="request_service.html">
+                    Request service
+                </a>
+            </div>
+    
+        </div>
+        <span class="slash"></span>
+    
+        <div class="user-tap">
+            <div class="user-tap-img">
+                <img src="imgs/abdooo.jpeg" alt="">
+            </div>
+            <div class="user-tap-drop">
+                <div class="user-tap-drop-item">
+                    <a href="?page=profile">
+                        <i class="fa-solid fa-user"></i>
+                        Profile
+                    </a>
+                </div>
+                <div class="user-tap-drop-item">
+                    <a href="?page=logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+    </nav>
+
+    <div class="edit-profile-container">
+        <div class="profile-header">
+            <div class="profile-image-container">
+                <img src="imgs/default-avatar.png" alt="Profile" class="profile-image">
+                <label for="image-upload" class="image-upload">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="image-upload" hidden accept="image/*">
+            </div>
+            <div class="profile-info">
+                <h1>Edit Profile</h1>
+                <p>Update your personal information and preferences</p>
+            </div>
+        </div>
+
+        <form class="edit-form">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" value="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" value="john.doe@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" value="+1 234 567 890">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" value="New York, USA">
+            </div>
+
+            <div class="form-group full-width">
+                <label for="bio">About Me</label>
+                <textarea id="bio">Experienced web developer with a passion for creating beautiful and functional websites.</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" id="password" placeholder="Enter new password">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password">
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-cancel">Cancel</button>
+                <button type="submit" class="btn btn-save">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script>
+        // Handle image upload preview
+        document.getElementById('image-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.profile-image').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle form submission
+        document.querySelector('.edit-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Profile updated successfully!');
+        });
+
+        // Handle cancel button
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
+                window.location.href = 'user-profile.html';
+            }
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

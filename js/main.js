@@ -42,3 +42,12 @@ $(".logo").click(function () {
     });
 });
 
+$('.user-tap-img').click(function () {
+    $('.user-tap-drop').toggle();
+});
+
+$(document).click(function (event) {
+    if (!$(event.target).closest('.user-tap').length) {
+        $('.user-tap-drop').hide();
+    }
+});
